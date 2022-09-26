@@ -2,7 +2,7 @@ package com.cryptography.controller;
 
 import com.cryptography.dto.DecryptReqDto;
 import com.cryptography.dto.EncryptReqDto;
-import com.cryptography.dto.UserReqDto;
+import com.cryptography.dto.UserDto;
 import com.cryptography.service.CryptoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,11 +19,12 @@ public class CryptoController {
     {
         return new ResponseEntity("Hello World", HttpStatus.OK);
     }
-    @PostMapping
-    public ResponseEntity<String> createUser(@RequestBody UserReqDto userReqDto)
-    {
 
-        return null;
+    @PostMapping("/create")
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userReqDto)
+    {
+        UserDto userDto  = cryptoService.ceateUser(userReqDto);
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
     @PostMapping("/encrypt")
     public ResponseEntity<String> encryptString(@RequestBody EncryptReqDto encryptReqDto)

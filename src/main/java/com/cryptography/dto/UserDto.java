@@ -1,32 +1,18 @@
 package com.cryptography.dto;
 
-public class UserResDo {
+public class UserDto {
 
     private String username;
     private String password;
     private String role;
-    private boolean active;
-    private String status;
 
-    public UserResDo() {
+    public UserDto() {
     }
-
-    public UserResDo(String username, String password, String role, boolean active, String status) {
+    public UserDto(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;
-        this.active = active;
-        this.status = status;
     }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -49,12 +35,5 @@ public class UserResDo {
 
     public void setRole(String role) {
         this.role = role;
-    }
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 }
