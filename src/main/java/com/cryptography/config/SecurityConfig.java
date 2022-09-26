@@ -7,32 +7,34 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-//    @Autowired
-//    UserDetailServiceImpl userDetailService;
+    @Autowired
+    CustomUserDetailManagerImpl userDetailManager;
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
-//        http.httpBasic();
+        http.httpBasic();
+        http.authorizeRequests().antMatchers("/h2-console/**").permitAll()
+                .and().authorizeRequests().antMatchers("/createUserWithSpringSecurity").hasRole("[ROLE_ADMIN]")
+                .and().authorizeRequests().anyRequest().authenticated()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.csrf().disable();
         http.headers().frameOptions().disable();
-//        http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());
-//    }
-    @Bean
-    public PasswordEncoder passwordEncoder()
-    {
-        return new Pbkdf2PasswordEncoder("kilid", 100, 512);
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailManager).passwordEncoder(passwordEncoder);
     }
+
 }

@@ -20,12 +20,21 @@ public class CryptoController {
         return new ResponseEntity("Hello World", HttpStatus.OK);
     }
 
-    @PostMapping("/create")
+    @PostMapping("/createUser")
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userReqDto)
     {
         UserDto userDto  = cryptoService.ceateUser(userReqDto);
+        userDto.setPassword(null);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
+    @PostMapping("/createUserWithSpringSecurity")
+    public ResponseEntity<UserDto> createUserWithSpringSecurity(@RequestBody UserDto userReqDto)
+    {
+        UserDto userDto  = cryptoService.createUserWithSpringSecurity(userReqDto);
+        userDto.setPassword(null);
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
+    }
+
     @PostMapping("/encrypt")
     public ResponseEntity<String> encryptString(@RequestBody EncryptReqDto encryptReqDto)
     {
