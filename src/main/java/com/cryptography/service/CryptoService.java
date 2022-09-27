@@ -58,4 +58,8 @@ public class CryptoService {
         customUserDetailManager.createUser(userDetails);
         return new UserDto("User created", "", "");
     }
+
+    public String signText(String text) {
+        return cryptographyOperation.signText(text);
+    }
 }

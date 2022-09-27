@@ -1,18 +1,31 @@
 package com.cryptography.cryptography;
 
+import com.cryptography.config.CertificateFieldsConfig;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.ByteArrayOutputStream;
-import java.security.AlgorithmParameters;
-import java.security.SecureRandom;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.security.*;
+import java.security.cert.CertificateException;
 import java.util.Arrays;
 @Component
 public class CryptographyOperation {
-    private  final byte[] keyBytes = "sattarzadehparin".getBytes();
+
+//    @Value("${encryption.key}")
+//    private String encryptionKey;
+    String encryptionKey ="sattarzadehparin";
+    @Autowired
+    CertificateFieldsConfig certificateFieldsConfig;
+
+    private  final byte[] keyBytes = encryptionKey.getBytes();
 
     public  String getEncryptWithJavaGeneratedIV(String value) {
         try
@@ -105,5 +118,34 @@ public class CryptographyOperation {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    public String signText(String text) {
+        String signedData="";
+        try
+        {
+            KeyStore keyStore = KeyStore.getInstance("PKCS12");
+            keyStore.load(this.getClass().getClassLoader()
+                            .getResourceAsStream(certificateFieldsConfig.getPath()),
+                    certificateFieldsConfig.getPassword().toCharArray());
+            PrivateKey privateKey =
+                    (PrivateKey) keyStore.getKey(certificateFieldsConfig.getAlias(),
+                            certificateFieldsConfig.getPassword().toCharArray());
+            Signature signature = Signature.getInstance("SHA256withRSA");
+            signature.initSign(privateKey);
+
+            byte[] messageBytes = text.getBytes();
+
+            signature.update(messageBytes);
+            byte[] digitalSignature = signature.sign();
+
+            signedData = Base64.encodeBase64String(digitalSignature);
+            return signedData;
+        }
+        catch (Exception ex)
+        {
+            return "Something Happened!";
+        }
+
     }
 }

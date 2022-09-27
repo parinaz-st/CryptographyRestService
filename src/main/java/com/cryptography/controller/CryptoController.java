@@ -2,6 +2,7 @@ package com.cryptography.controller;
 
 import com.cryptography.dto.DecryptReqDto;
 import com.cryptography.dto.EncryptReqDto;
+import com.cryptography.dto.ToBeSignedDto;
 import com.cryptography.dto.UserDto;
 import com.cryptography.service.CryptoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,14 @@ public class CryptoController {
         return new ResponseEntity("Hello World", HttpStatus.OK);
     }
 
-    @PostMapping("/createUser")
+    @PostMapping("/admin/createUser")
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userReqDto)
     {
         UserDto userDto  = cryptoService.ceateUser(userReqDto);
         userDto.setPassword(null);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
-    @PostMapping("/createUserWithSpringSecurity")
+    @PostMapping("/admin/createUserWithSpringSecurity")
     public ResponseEntity<UserDto> createUserWithSpringSecurity(@RequestBody UserDto userReqDto)
     {
         UserDto userDto  = cryptoService.createUserWithSpringSecurity(userReqDto);
@@ -55,5 +56,12 @@ public class CryptoController {
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
         return new ResponseEntity<>("Something wicked this way comes", HttpStatus.OK);
+    }
+    @PostMapping("/sign")
+    public ResponseEntity<String> Sign(@RequestBody ToBeSignedDto toBeSignedDto)
+    {
+        String signedTest = cryptoService.signText(toBeSignedDto.getText());
+
+        return new ResponseEntity<>(signedTest, HttpStatus.OK);
     }
 }

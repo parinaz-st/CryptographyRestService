@@ -24,8 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic();
+        http.authorizeRequests().antMatchers("/admin/**").hasRole("[ROLE_ADMIN]");
         http.authorizeRequests().antMatchers("/h2-console/**").permitAll()
-                .and().authorizeRequests().antMatchers("/createUserWithSpringSecurity").hasRole("[ROLE_ADMIN]")
                 .and().authorizeRequests().anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.csrf().disable();
