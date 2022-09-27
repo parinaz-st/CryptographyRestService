@@ -146,6 +146,29 @@ public class CryptographyOperation {
         {
             return "Something Happened!";
         }
+    }
+    public boolean verifySignature(String signedData, String signatureValue)
+    {
+        try
+        {
+            KeyStore keyStore = KeyStore.getInstance("PKCS12");
+            keyStore.load(this.getClass().getClassLoader()
+                            .getResourceAsStream(certificateFieldsConfig.getPath()),
+                    certificateFieldsConfig.getPassword().toCharArray());
+            Certificate certificate = (Certificate) keyStore.getCertificate("receiverKeyPair");
+            PublicKey publicKey = certificate.getPublicKey();
 
+            Signature signature = Signature.getInstance("SHA256withRSA");
+            signature.initVerify(publicKey);
+            byte[] messageBytes = signedData.getBytes();
+            signature.update(messageBytes);
+            boolean isCorrect = signature.verify(signatureValue.getBytes());
+
+            return isCorrect;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
     }
 }
