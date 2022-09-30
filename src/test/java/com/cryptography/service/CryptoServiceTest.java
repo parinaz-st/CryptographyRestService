@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 public class CryptoServiceTest {
+
     @Autowired
     CryptoService cryptoService;
 
