@@ -1,21 +1,17 @@
-package com.cryptography.cryptography;
+package com.cryptography.cryptoOperation;
 
 import com.cryptography.config.CertificateFieldsConfig;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.security.*;
-import java.security.cert.CertificateException;
 import java.util.Arrays;
+
 @Component
 public class CryptographyOperation {
 

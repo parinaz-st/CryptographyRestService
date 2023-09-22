@@ -1,5 +1,6 @@
-package com.cryptography.service;
+package cryptography.service;
 
+import com.cryptography.service.CryptoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

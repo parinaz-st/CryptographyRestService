@@ -2,7 +2,6 @@ package com.cryptography;
 
 import com.cryptography.config.CertificateFieldsConfig;
 import com.cryptography.config.CustomUserDetailManagerImpl;
-import com.cryptography.entity.User;
 import com.cryptography.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
