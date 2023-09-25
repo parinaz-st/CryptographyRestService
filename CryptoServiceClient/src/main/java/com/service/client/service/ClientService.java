@@ -12,7 +12,7 @@ public class ClientService {
     public String callTest(){
         return getTestService.callGetTest();
     }
-    public EncryptResDto callEncrypt(String plainText){
-        return getTestService.calPostTest(plainText);
+    public String callEncrypt(){
+        return getTestService.calPostTest();
     }
 }
