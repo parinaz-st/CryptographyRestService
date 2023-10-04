@@ -1,9 +1,6 @@
 package com.cryptography.controller;
 
-import com.cryptography.dto.DecryptReqDto;
-import com.cryptography.dto.EncryptReqDto;
-import com.cryptography.dto.ToBeSignedDto;
-import com.cryptography.dto.UserDto;
+import com.cryptography.dto.*;
 import com.cryptography.service.CryptoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,15 +37,19 @@ public class CryptoController {
     }
 
     @PostMapping("/encrypt")
-    public ResponseEntity<String> encryptString(@RequestBody EncryptReqDto encryptReqDto)
+    public ResponseEntity<EncryptResDto> encryptString(@RequestBody EncryptReqDto encryptReqDto)
     {
         String result = cryptoService.encryptString(encryptReqDto.getPlainText());
+        EncryptResDto encryptResDto = new EncryptResDto();
 
         if (result != null)
         {
-            return new ResponseEntity<>(result, HttpStatus.OK);
+            encryptResDto.setCipherText(result);
         }
-        return new ResponseEntity<>("Something wicked this way comes", HttpStatus.OK);
+        else{
+            encryptResDto.setCipherText("Something wicked this way comes");
+        }
+        return new ResponseEntity<>(encryptResDto, HttpStatus.OK);
     }
     @PostMapping("/decrypt")
     public ResponseEntity<String> decryptString(@RequestBody DecryptReqDto decryptReqDto)

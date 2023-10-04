@@ -1,5 +1,6 @@
 package com.service.client.service;
 
+import com.service.client.dto.EncryptReqDto;
 import com.service.client.dto.EncryptResDto;
 import com.service.client.withoutswagger.resttemplate.CallTestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ public class ClientService {
         return getTestService.callGetTest();
     }
     public EncryptResDto callEncrypt(String plainText){
-        return getTestService.calPostTest(plainText);
+        EncryptReqDto encryptReqDto = new EncryptReqDto();
+        encryptReqDto.setPlainText(plainText);
+        return getTestService.calPostTest(encryptReqDto);
     }
 }

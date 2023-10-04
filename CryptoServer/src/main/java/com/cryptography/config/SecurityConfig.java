@@ -24,8 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic();
 //        http.authorizeRequests().antMatchers("/admin/**").hasRole("[ROLE_ADMIN]");
         http.authorizeRequests().antMatchers("/h2-console/**").permitAll()
-//                .and().authorizeRequests().anyRequest().authenticated()
-                .and().authorizeRequests().anyRequest().permitAll()
+                .and().authorizeRequests().anyRequest().authenticated()
+//                .and().authorizeRequests().anyRequest().permitAll()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.csrf().disable();
         http.headers().frameOptions().disable();
