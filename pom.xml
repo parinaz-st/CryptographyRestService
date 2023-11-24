@@ -11,6 +11,7 @@
     <modules>
         <module>CryptoServiceClient</module>
         <module>CryptoServer</module>
+        <module>HSM-Crypto-Service</module>
     </modules>
 
     <parent>
