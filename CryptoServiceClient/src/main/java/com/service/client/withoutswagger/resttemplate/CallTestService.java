@@ -22,6 +22,9 @@ public class CallTestService {
     private String password;
     public String callGetTest(){
         String url = "http://localhost:9097/test";
+        // TO-DO bug FIX
+//        HttpHeaders headers = initHeaders();
+//        HttpEntity<EncryptReqDto> httpEntity = new HttpEntity<EncryptReqDto>(reqDto, headers);
         String result = restTemplate.getForObject(url, String.class);
         return result;
     }

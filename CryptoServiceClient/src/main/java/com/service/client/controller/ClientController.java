@@ -18,7 +18,7 @@ public class ClientController {
     }
     @GetMapping("/call-encrypt")
     public ResponseEntity<EncryptResDto> CallEncrypt(){
-        String result = clientService.callEncrypt();
+        String result = clientService.callEncrypt("Parinaz").getCipherText();
         EncryptResDto encryptResDto = new EncryptResDto();
         encryptResDto.setCipherText(result);
         return new ResponseEntity<EncryptResDto>(encryptResDto, HttpStatus.OK);
