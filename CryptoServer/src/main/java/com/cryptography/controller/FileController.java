@@ -20,5 +20,10 @@ public class FileController {
         fileService.readFile();
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
+    @GetMapping("/encryptfile")
+    public ResponseEntity<String> encryptFile(){
+
+        return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
 
 }

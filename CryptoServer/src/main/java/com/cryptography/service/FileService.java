@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -23,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -121,6 +124,14 @@ public class FileService {
 
         transformer.transform(source, result);
 
+    }
+    private Boolean symmetricEncryptFile() {
+
+        return true;
+    }
+    //TO-DO
+    private Boolean AsymmetricEncryptFile(){
+        return true;
     }
 
 }

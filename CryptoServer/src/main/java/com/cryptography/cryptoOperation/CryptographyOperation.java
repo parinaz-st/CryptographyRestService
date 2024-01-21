@@ -167,4 +167,8 @@ public class CryptographyOperation {
             return false;
         }
     }
+    public String symmetricEncryptZipFile(String filePath){
+    return null;
+
+    }
 }
