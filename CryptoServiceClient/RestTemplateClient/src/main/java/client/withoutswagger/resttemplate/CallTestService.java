@@ -1,8 +1,7 @@
-package com.service.client.withoutswagger.resttemplate;
+package client.withoutswagger.resttemplate;
 
-import com.service.client.dto.EncryptReqDto;
-import com.service.client.dto.EncryptResDto;
-import org.apache.tomcat.util.codec.binary.Base64;
+import client.dto.EncryptReqDto;
+import client.dto.EncryptResDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -10,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
 @Service
 public class CallTestService {
     @Autowired

@@ -1,4 +1,4 @@
-package cryptography;
+package com.cryptography;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

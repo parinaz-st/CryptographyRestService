@@ -1,7 +1,7 @@
-package com.service.client.controller;
+package client.controller;
 
-import com.service.client.dto.EncryptResDto;
-import com.service.client.service.ClientService;
+import client.dto.EncryptResDto;
+import client.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

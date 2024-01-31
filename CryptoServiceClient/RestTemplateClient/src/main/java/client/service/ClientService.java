@@ -1,8 +1,8 @@
-package com.service.client.service;
+package client.service;
 
-import com.service.client.dto.EncryptReqDto;
-import com.service.client.dto.EncryptResDto;
-import com.service.client.withoutswagger.resttemplate.CallTestService;
+import client.dto.EncryptReqDto;
+import client.dto.EncryptResDto;
+import client.withoutswagger.resttemplate.CallTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

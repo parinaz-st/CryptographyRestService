@@ -1,4 +1,4 @@
-package com.service.client.dto;
+package client.dto;
 
 public class EncryptResDto {
     private String cipherText;
