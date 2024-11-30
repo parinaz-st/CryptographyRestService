@@ -62,5 +62,11 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web-services</artifactId>
             </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.jodavimehran/code-tracker -->
+        <dependency>
+            <groupId>io.github.jodavimehran</groupId>
+            <artifactId>code-tracker</artifactId>
+            <version>2.6</version>
+        </dependency>
     </dependencies>
 </project>

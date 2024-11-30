@@ -6,11 +6,15 @@ import com.cryptography.dto.UserDto;
 import com.cryptography.entity.User;
 import com.cryptography.mapper.UserMapper;
 import com.cryptography.repository.UserRepository;
+import org.codetracker.api.CodeTracker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 
 
 @Service
@@ -35,12 +39,13 @@ public class CryptoService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public UserDto ceateUser(UserDto userReqDto) {
-
+    public UserDto ceateUser(UserDto userReqDto, HttpServletRequest request) {
+        CodeTracker.methodTracker();
         if (customUserDetailManager.userExists(userReqDto.getUsername()))
             return new UserDto("User Already Exists", "", "");
         userReqDto.setPassword(passwordEncoder.encode(userReqDto.getPassword()));
         User user = userMapper.toEntity(userReqDto);
+        System.out.println(request.getHeaderNames());
         //just added this to test Code Tracker
         return userMapper.toDto(userRepository.save(user));
     }
