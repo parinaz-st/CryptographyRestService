@@ -57,9 +57,9 @@ public class CryptographyApplication implements CommandLineRunner {
                 MethodTracker methodTracker = CodeTracker.methodTracker()
                         .repository(repository)
                         .filePath("src/main/java/com/cryptography/service/CryptoService.java")
-                        .startCommitId("46807692320c832f023259a5ec5b9056b9d5dfac")
+                        .startCommitId("beb2870e74f217817e75c25d2352a6b521f3ff90")
                         .methodName("ceateUser")
-                        .methodDeclarationLineNumber(28)
+                        .methodDeclarationLineNumber(39)
                         .build();
 
                 History<Method> methodHistory = methodTracker.track();
