@@ -39,13 +39,11 @@ public class CryptoService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public UserDto ceateUser(UserDto userReqDto, HttpServletRequest request) {
+    public UserDto createUser(UserDto userReqDto) {
         if (customUserDetailManager.userExists(userReqDto.getUsername()))
             return new UserDto("User Already Exists", "", "");
         userReqDto.setPassword(passwordEncoder.encode(userReqDto.getPassword()));
         User user = userMapper.toEntity(userReqDto);
-        System.out.println(request.getHeaderNames());
-        //just added this to test Code Tracker
         return userMapper.toDto(userRepository.save(user));
     }
     public UserDto createUserWithSpringSecurity(UserDto userReqDto)
