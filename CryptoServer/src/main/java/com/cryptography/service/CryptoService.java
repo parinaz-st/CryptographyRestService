@@ -6,15 +6,11 @@ import com.cryptography.dto.UserDto;
 import com.cryptography.entity.User;
 import com.cryptography.mapper.UserMapper;
 import com.cryptography.repository.UserRepository;
-import org.codetracker.api.CodeTracker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 
 
 @Service
