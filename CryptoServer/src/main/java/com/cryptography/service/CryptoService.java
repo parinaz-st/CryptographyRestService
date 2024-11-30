@@ -41,6 +41,7 @@ public class CryptoService {
             return new UserDto("User Already Exists", "", "");
         userReqDto.setPassword(passwordEncoder.encode(userReqDto.getPassword()));
         User user = userMapper.toEntity(userReqDto);
+        //just added this to test Code Tracker
         return userMapper.toDto(userRepository.save(user));
     }
     public UserDto createUserWithSpringSecurity(UserDto userReqDto)
