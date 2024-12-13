@@ -12,6 +12,7 @@ import org.eclipse.jgit.lib.Repository;
 import org.refactoringminer.api.GitService;
 import org.refactoringminer.util.GitServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,6 +32,11 @@ public class CryptographyApplication implements CommandLineRunner {
     PasswordEncoder passwordEncoder;
     @Autowired
     CustomUserDetailManagerImpl userDetailManager;
+    @Value("${codetracker.repository.local.path}")
+    private String repositoryLocalPath;
+    @Value("${codetracker.repository.github.path}")
+    private String repositoryGithubPath;
+
     private final static String FOLDER_TO_CLONE = "tmp/";
 
     public static void main(String[] args){
@@ -39,20 +45,20 @@ public class CryptographyApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        UserDetails userDetails = org.springframework.security.core.userdetails.User
-//                .withUsername("admin")
-//                .password("Asdfgh123456")
-//                .roles("ADMIN")
-//                .build();
-//        userDetailManager.createUser(userDetails);
+        UserDetails userDetails = org.springframework.security.core.userdetails.User
+                .withUsername("admin")
+                .password("Asdfgh123456")
+                .roles("ADMIN")
+                .build();
+        userDetailManager.createUser(userDetails);
 
 
         GitService gitService = new GitServiceImpl();
         // METHOD TRACKING EXAMPLE
         try{
 
-            try (Repository repository = gitService.cloneIfNotExists("E:\\Sattarzadeh\\Codes\\github\\CryptoService-Refactored",
-                    "https://github.com/parinaz-st/CryptographyRestService.git")){
+            try (Repository repository = gitService.cloneIfNotExists(repositoryLocalPath,
+                    repositoryGithubPath)){
 
                 MethodTracker methodTracker = CodeTracker.methodTracker()
                         .repository(repository)
