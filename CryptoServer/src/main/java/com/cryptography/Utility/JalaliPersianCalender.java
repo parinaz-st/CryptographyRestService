@@ -1,5 +1,7 @@
 package com.cryptography.Utility;
 
+import java.time.LocalDate;
+
 public  class  JalaliPersianCalender {
 
         /**  Gregorian & Jalali (Hijri_Shamsi,Solar) Date Converter Functions
@@ -53,4 +55,13 @@ public  class  JalaliPersianCalender {
             int[] gregorian = { gy, gm, gd };
             return gregorian;
         }
+    public static String getCurrentPersianDate()
+    {
+        String persianDate;
+        LocalDate today = LocalDate.now();
+        int [] persianDateToday = JalaliPersianCalender.gregorian_to_jalali(today.getYear(), today.getMonth().getValue(), today.getDayOfMonth());
+        persianDate = String.format("%04d/%02d/%02d", persianDateToday[0], persianDateToday[1], persianDateToday[2]);
+        return persianDate;
+    }
+
 }
