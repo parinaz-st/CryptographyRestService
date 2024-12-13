@@ -40,7 +40,7 @@ public class CryptoService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public UserDto createUser(UserDto userReqDto) {
+    public UserDto ceateUser(UserDto userReqDto) {
         if (customUserDetailManager.userExists(userReqDto.getUsername()))
             return new UserDto("User Already Exists", "", "");
         userReqDto.setPassword(passwordEncoder.encode(userReqDto.getPassword()));

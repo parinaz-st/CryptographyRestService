@@ -24,9 +24,9 @@ public class CryptoController {
     }
 
     @PostMapping("/admin/createUser")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userReqDto)
+    public ResponseEntity<UserDto> ceateUser(@RequestBody UserDto userReqDto)
     {
-        UserDto userDto  = cryptoService.createUser(userReqDto);
+        UserDto userDto  = cryptoService.ceateUser(userReqDto);
         userDto.setPassword(null);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
