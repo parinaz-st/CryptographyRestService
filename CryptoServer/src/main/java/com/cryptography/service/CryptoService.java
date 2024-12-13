@@ -1,20 +1,25 @@
 package com.cryptography.service;
 
+import com.cryptography.Utility.JalaliPersianCalender;
 import com.cryptography.config.CustomUserDetailManagerImpl;
 import com.cryptography.cryptoOperation.CryptographyOperation;
 import com.cryptography.dto.UserDto;
 import com.cryptography.entity.User;
 import com.cryptography.mapper.UserMapper;
 import com.cryptography.repository.UserRepository;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 
 @Service
 public class CryptoService {
+    private static final org.apache.logging.log4j.Logger log = LogManager.getLogger(CryptoService.class);
     @Autowired
     CryptographyOperation cryptographyOperation;
     @Autowired
@@ -40,6 +45,11 @@ public class CryptoService {
             return new UserDto("User Already Exists", "", "");
         userReqDto.setPassword(passwordEncoder.encode(userReqDto.getPassword()));
         User user = userMapper.toEntity(userReqDto);
+        String persianDate;
+        LocalDate today = LocalDate.now();
+        int [] persianDateToday = JalaliPersianCalender.gregorian_to_jalali(today.getYear(), today.getMonth().getValue(), today.getDayOfMonth());
+        persianDate = String.format("%04d/%02d/%02d", persianDateToday[0], persianDateToday[1], persianDateToday[2]);
+        log.info("User " + userReqDto.getUsername() + "Created on: " + persianDate);
         return userMapper.toDto(userRepository.save(user));
     }
     public UserDto createUserWithSpringSecurity(UserDto userReqDto)
