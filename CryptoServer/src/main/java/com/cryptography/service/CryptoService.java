@@ -45,8 +45,8 @@ public class CryptoService {
             return new UserDto("User Already Exists", "", "");
         userReqDto.setPassword(passwordEncoder.encode(userReqDto.getPassword()));
         User user = userMapper.toEntity(userReqDto);
-        String persianDate;
         LocalDate today = LocalDate.now();
+        String persianDate;
         int [] persianDateToday = JalaliPersianCalender.gregorian_to_jalali(today.getYear(), today.getMonth().getValue(), today.getDayOfMonth());
         persianDate = String.format("%04d/%02d/%02d", persianDateToday[0], persianDateToday[1], persianDateToday[2]);
         log.info("User " + userReqDto.getUsername() + "Created on: " + persianDate);

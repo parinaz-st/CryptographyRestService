@@ -3,6 +3,14 @@ package com.cryptography;
 import com.cryptography.config.CertificateFieldsConfig;
 import com.cryptography.config.CustomUserDetailManagerImpl;
 import com.cryptography.repository.UserRepository;
+import org.codetracker.api.CodeTracker;
+import org.codetracker.api.History;
+import org.codetracker.api.MethodTracker;
+import org.codetracker.change.Change;
+import org.codetracker.element.Method;
+import org.eclipse.jgit.lib.Repository;
+import org.refactoringminer.api.GitService;
+import org.refactoringminer.util.GitServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -11,6 +19,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 @SpringBootApplication
 @EnableConfigurationProperties(CertificateFieldsConfig.class)
