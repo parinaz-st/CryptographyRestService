@@ -1,5 +1,7 @@
 package com.cryptography.entity;
 
+import com.cryptography.dto.UserInfoDto;
+
 import javax.persistence.*;
 import java.util.Date;
 @Entity
@@ -25,10 +27,9 @@ public class UserInfo {
     @Column(nullable = false)
     private Date lastLoggedIn;
     @Column(nullable = false)
-    private boolean firstLogin;
+    private boolean firstLoginPasswordChanged;
 
     public UserInfo(String username, String password, String role, Integer userBankCode, Integer userBranchCode, Date userCreationDate, boolean isActive, Date lastLoggedIn, boolean firstLogin) {
-        this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
@@ -37,7 +38,19 @@ public class UserInfo {
         this.userCreationDate = userCreationDate;
         this.isActive = isActive;
         this.lastLoggedIn = lastLoggedIn;
-        this.firstLogin = firstLogin;
+        this.firstLoginPasswordChanged = firstLogin;
+    }
+    public UserInfo(UserInfoDto userInfoDto){
+        this.username = userInfoDto.getUsername();
+        this.password = userInfoDto.getPassword();
+        this.role = userInfoDto.getRole();
+        this.userBankCode = userInfoDto.getUserBankCode();
+        this.userBranchCode = userInfoDto.getBranchCode();
+        this.userCreationDate = userInfoDto.getUserCreationDate();
+        this.isActive = userInfoDto.isActive();
+        this.lastLoggedIn = userInfoDto.getLastLoggedIn();
+        this.firstLoginPasswordChanged = userInfoDto.isFirstLoginPasswordChanged();
+
     }
 
     public Long getId() {
@@ -113,11 +126,11 @@ public class UserInfo {
     }
 
     public boolean isFirstLogin() {
-        return firstLogin;
+        return firstLoginPasswordChanged;
     }
 
     public void setFirstLogin(boolean firstLogin) {
-        this.firstLogin = firstLogin;
+        this.firstLoginPasswordChanged = firstLogin;
     }
 
     public UserInfo() {

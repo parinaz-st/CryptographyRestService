@@ -4,6 +4,7 @@ import com.cryptography.Utility.JalaliPersianCalender;
 import com.cryptography.config.CustomUserDetailManagerImpl;
 import com.cryptography.cryptoOperation.CryptographyOperation;
 import com.cryptography.dto.UserDto;
+import com.cryptography.dto.UserInfoDto;
 import com.cryptography.entity.User;
 import com.cryptography.entity.UserInfo;
 import com.cryptography.mapper.UserMapper;
@@ -73,12 +74,11 @@ public class CryptoService {
         return cryptographyOperation.signText(text);
     }
     @Transactional(rollbackFor = Exception.class)
-    public void addUserInfo(String username, String password, String role, int userBankCode,
-                        int branchCode,Date userCreationDate, boolean isActive, Date lastLoggedIn, boolean firstLoginPasswordChanged) throws Exception {
-        if (customUserDetailManager.userExists(username))
+    public void addUserInfo(UserInfoDto userInfoDto) throws Exception {
+        if (customUserDetailManager.userExists(userInfoDto.getUsername()))
             throw new Exception("User Already Exists");
-        password=passwordEncoder.encode(password);
-        UserInfo userInfo = new UserInfo(username, password, role, userBankCode, branchCode, userCreationDate, isActive, lastLoggedIn, firstLoginPasswordChanged);
+        userInfoDto.setPassword(passwordEncoder.encode(userInfoDto.getPassword()));
+        UserInfo userInfo = new UserInfo(userInfoDto);
         userInfoRepository.save(userInfo);
         log.info(userInfo);
     }
