@@ -67,4 +67,15 @@ public class CryptoService {
     public String signText(String text) {
         return cryptographyOperation.signText(text);
     }
+    @Transactional(rollbackFor = Exception.class)
+    public UserDto AddUserInfo(String username, String password, String role) {
+        if (customUserDetailManager.userExists(username))
+            return new UserDto("User Already Exists", "", "");
+         password=passwordEncoder.encode(password);
+        User user = new User(username, password, role);
+        String persianDate = JalaliPersianCalender.getCurrentPersianDate();
+        log.info("User " + username + "Created on: " + persianDate);
+        return userMapper.toDto(userRepository.save(user));
+    }
+
 }
