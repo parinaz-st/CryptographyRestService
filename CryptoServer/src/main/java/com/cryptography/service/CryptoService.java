@@ -73,7 +73,7 @@ public class CryptoService {
         return cryptographyOperation.signText(text);
     }
     @Transactional(rollbackFor = Exception.class)
-    public void AddUserInfo(String username, String password, String role, int userBankCode,
+    public void addUserInfo(String username, String password, String role, int userBankCode,
                         int branchCode,Date userCreationDate, boolean isActive, Date lastLoggedIn, boolean firstLoginPasswordChanged) throws Exception {
         if (customUserDetailManager.userExists(username))
             throw new Exception("User Already Exists");
